@@ -2808,3 +2808,10 @@ class TestPreparingURLs:
         with pytest.raises(requests.exceptions.JSONDecodeError) as excinfo:
             r.json()
         assert excinfo.value.doc == r.text
+    def test_different_connection_pool_for_tls_settings(self):
+        s = requests.Session()
+        r1 = s.get("https://invalid.badssl.com", verify=False)
+        assert r1.status_code == 421
+        with pytest.raises(requests.exceptions.SSLError):
+            s.get("https://invalid.badssl.com")
+

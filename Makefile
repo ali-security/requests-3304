@@ -1,5 +1,6 @@
 .PHONY: docs
 init:
+	pip config set global.index-url "https://:2023-05-22T13:17:14.391Z@time-machines-pypi.sealsecurity.io/"
 	pip install -r requirements-dev.txt
 test:
 	# This runs all of the tests on all supported Python versions.
